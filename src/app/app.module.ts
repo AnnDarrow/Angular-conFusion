@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import 'hammerjs';
@@ -25,6 +25,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -61,7 +63,10 @@ import { LeaderService } from'./services/leader.service';
 	MatDialogModule,
 	MatFormFieldModule,
 	MatInputModule,
-	MatCheckboxModule	
+	MatCheckboxModule,
+	MatSelectModule,
+	MatSlideToggleModule,
+	ReactiveFormsModule
   ],
   exports: [MatCardModule],
   providers: [DishService, PromotionService,LeaderService],
