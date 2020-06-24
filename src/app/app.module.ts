@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import{ FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -16,10 +17,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { DishService } from'./services/dish.service';
 
 import { PromotionService } from'./services/promotion.service';
+
+import { LeaderService } from'./services/leader.service';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -32,7 +37,8 @@ import { PromotionService } from'./services/promotion.service';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,10 +48,16 @@ import { PromotionService } from'./services/promotion.service';
 	MatToolbarModule,
 	MatGridListModule,
 	MatCardModule,
-	MatButtonModule
+	MatButtonModule,
+	MatListModule,
+	MatDialogModule
 	
   ],
-  providers: [DishService, PromotionService],
-  bootstrap: [AppComponent]
+  exports: [MatCardModule],
+  providers: [DishService, PromotionService,LeaderService],
+  bootstrap: [AppComponent],
+  entryComponents:[LoginComponent]
 })
+
+
 export class AppModule { }
