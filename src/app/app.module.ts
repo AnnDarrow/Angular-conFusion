@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import{ FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -12,8 +13,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 import 'hammerjs';
@@ -53,6 +56,7 @@ import { LeaderService } from'./services/leader.service';
     BrowserModule,
     AppRoutingModule,
 	BrowserAnimationsModule,
+	CommonModule,
 	FlexLayoutModule,
 	FormsModule,
 	MatToolbarModule,
@@ -66,6 +70,7 @@ import { LeaderService } from'./services/leader.service';
 	MatCheckboxModule,
 	MatSelectModule,
 	MatSlideToggleModule,
+	MatSliderModule,
 	ReactiveFormsModule
   ],
   exports: [MatCardModule],
