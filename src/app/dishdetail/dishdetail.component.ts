@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input,Injector, ViewChild} from '@angular/core';
+import { Component, OnInit ,Input,Injector, ViewChild,Inject} from '@angular/core';
 
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,7 +10,9 @@ import { DishService } from '../services/dish.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Comment } from '../shared/comment';
-
+import { baseURL } from '../shared/baseurl';
+import { HttpClient } from '@angular/common/http';
+import { map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dishdetail',
@@ -20,10 +22,14 @@ import { Comment } from '../shared/comment';
 export class DishdetailComponent implements OnInit {
 
   dish!: Dish;
+  dishIds!:string[];
+  prev!:string;
+  next!:string;
+  errMess!:string;
   
   commentForm!: FormGroup;
   comment!: Comment;
-  @ViewChild('fform') commentFormDirective;
+  @ViewChild('cform') commentFormDirective;
   
   formErrors = {
   	'author':'',
@@ -45,13 +51,20 @@ export class DishdetailComponent implements OnInit {
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
-	private fb: FormBuilder) {
-		this.createForm();
-	}
+	private fb: FormBuilder,
+	@Inject('baseURL') public baseURL) { }
+	setPrevNext(dishId: string) {
+    const index = this.dishIds.indexOf(dishId);
+    this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+    this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
+  }
+  
 
   ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
-    this.dishservice.getDish(String(id)).subscribe(dish => { this.dish = dish;});
+    this.createForm();
+  this.dishservice.getDishIds().subscribe(dishIds=>this.dishIds = dishIds);
+		this.route.params.pipe(switchMap((params: Params)=> this.dishservice.getDish(params['id']))) .subscribe(dish=>  this.dish = dish); this.setPrevNext;
+		errmess=> this.errMess=<any>errmess;
   }
 
   goBack(): void {

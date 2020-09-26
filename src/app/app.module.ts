@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -30,13 +31,16 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
 import { DishService } from'./services/dish.service';
 import { PromotionService } from'./services/promotion.service';
 import { LeaderService } from'./services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
+import { baseURL } from './shared/baseurl';
 
 
 
@@ -57,6 +61,8 @@ import { LeaderService } from'./services/leader.service';
     AppRoutingModule,
 	BrowserAnimationsModule,
 	CommonModule,
+	HttpClientModule,
+	MatProgressSpinnerModule,
 	FlexLayoutModule,
 	FormsModule,
 	MatToolbarModule,
@@ -74,7 +80,13 @@ import { LeaderService } from'./services/leader.service';
 	ReactiveFormsModule
   ],
   exports: [MatCardModule],
-  providers: [DishService, PromotionService,LeaderService],
+  providers: [
+  DishService, 
+  PromotionService,
+  LeaderService,
+  ProcessHTTPMsgService,
+  {provide: 'baseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent],
   entryComponents:[LoginComponent]
 })
